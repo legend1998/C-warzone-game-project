@@ -1,4 +1,4 @@
-#include "temp.h"
+#include "player.h"
 
 // Player class constructor  with arguments name
 
@@ -6,6 +6,19 @@ Player::Player(string name)
 {
     this->name = name;
 }
+
+
+//Player class copy constructor
+
+Player::Player(const Player &player)
+{
+    this->name = player.name;
+    this->cards = player.cards;
+    this->orders = player.orders;
+    this->territories = player.territories;
+    
+}
+
 // Player addcard functioin with card pointer arguments
 
 void Player::AddCard(Card *card)
@@ -21,9 +34,10 @@ string Player::getName()
 
 // add territory to the player's list of territory
 
-void Player::AddTerritory(Territory *territory){
+void Player::AddTerritory(Territory *territory)
+{
     this->territories.push_back(territory);
-	}
+}
 
 // return that neighbour territory which don't have current player;
 

@@ -30,6 +30,9 @@ public:
     Player *player;
 
     Deploy(Territory *territory, Player *player, int num);
+    
+    //copy constructor
+    Deploy(const Deploy &d);
 
     bool validate();
 
@@ -47,6 +50,9 @@ public:
     Player *player;
 
     Advance(Territory *src, Territory *dest, Player *player, int no_of_troops);
+    
+    //copy constructor
+    Advance(const Advance &d);
 
     bool validate();
 
@@ -63,6 +69,9 @@ public:
     Player *player;
 
     Bomb(Territory *dest, Player *player);
+    
+    //copy constructor
+    Bomb(const Bomb &d);
 
     bool validate();
 
@@ -80,6 +89,9 @@ public:
     int no_of_troops;
 
     Airlift(Territory *src, Territory *dest, Player *player, int no_of_troops);
+    
+    //copy constructor
+    Airlift(const Airlift &d);
 
     bool validate();
 
@@ -92,7 +104,10 @@ class Negotiate : public Order
 {
 public:
     Player *me, *negotiate_with;
+    
     Negotiate(Player *me, Player *foy);
+    
+    Negotiate(const Negotiate &d);
 
     bool validate();
 
@@ -108,6 +123,9 @@ public:
     Player *player;
 
     Blockade(Territory *territory, Player *player);
+    
+    //copy constructor
+    Blockade(const Blockade &d);
 
     bool validate();
 
@@ -123,6 +141,8 @@ class Orderlist
     list<Order *> orders;
 
 public:
+	
+	
     // add order to the list
     void addOrder(Order *order)
     {
@@ -185,6 +205,21 @@ public:
     {
         this->troops = 0;
     };
+    
+    //copy constructor
+    Territory(const Territory &d){
+    	this->name = d.name;
+    	this->adjacent_territory = d.adjacent_territory;
+    	this->owner = d.owner;
+    	this->troops = d.troops;
+	}
+	
+	friend istream & operator >>(istream &in, Territory &t){
+		cout<<"territory name"<<endl;
+		cin>>t.name;
+		cout<<"number of  troops"<<endl;
+		cin>>t.troops;
+	}
 
     //constructor with arguments name
     Territory(string name)
@@ -295,6 +330,21 @@ public:
     {
         this->name = name;
     }
+    //copy constructor
+    Player(const Player &p){
+    	this->name = p.name;
+    	this->negotiate_with = p.negotiate_with;
+    	this->territories = p.territories;
+    
+	};
+	
+	
+	// stream insertion operator 
+	
+	friend istream & operator >>(istream &in,Player &p){
+		cout<<"player name"<<endl;
+		cin>>p.name;
+	}
 
     list<Territory *> getTerritories()
     {

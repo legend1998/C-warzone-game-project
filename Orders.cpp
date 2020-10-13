@@ -9,6 +9,14 @@ Deploy::Deploy(Territory *territory, Player *player, int num)
     this->territory = territory;
 }
 
+
+// copy constructor declaration
+Deploy::Deploy(const Deploy &d){
+	 this->num_of_troops = d.num_of_troops;
+    this->player = d.player;
+    this->territory = d.territory;
+}
+
 // validate if this territory belongs to the player or not
 
 bool Deploy::validate()
@@ -38,6 +46,15 @@ Advance::Advance(Territory *src, Territory *dest, Player *player, int no_of_troo
     this->src = src;
     this->dest = dest;
     this->player = player;
+}
+
+// copy constructor declaration
+
+Advance::Advance(const Advance &d){
+	this->no_of_troops = d.no_of_troops;
+    this->src = d.src;
+    this->dest = d.dest;
+    this->player = d.player;
 }
 
 bool Advance::validate()
@@ -102,6 +119,12 @@ Bomb::Bomb(Territory *dest, Player *player)
     this->player = player;
 }
 
+// copy constructor declarations
+Bomb::Bomb(const Bomb &d){
+	this->dest = d.dest;
+    this->player = d.player;
+}
+
 bool Bomb::validate()
 {
     //if territory has owner or not
@@ -160,6 +183,15 @@ Airlift::Airlift(Territory *src, Territory *dest, Player *player, int no_of_troo
     this->no_of_troops = no_of_troops;
 }
 
+//copy constructor declaration
+Airlift::Airlift(const Airlift &d){
+	this->player = d.player;
+    this->src = d.src;
+    this->dest = d.dest;
+    this->no_of_troops = d.no_of_troops;
+}
+
+
 bool Airlift::validate()
 {
     //return false if both territory are same
@@ -208,6 +240,13 @@ Negotiate::Negotiate(Player *me, Player *foy)
     this->negotiate_with = foy;
 }
 
+//copy constructor declarations
+
+Negotiate::Negotiate(const Negotiate &d){
+	this->me = d.me;
+	this->negotiate_with = d.negotiate_with;
+}
+
 bool Negotiate::validate()
 {
     //return false if both player are same
@@ -233,6 +272,11 @@ Blockade::Blockade(Territory *territory, Player *player)
 {
     this->src = territory;
     this->player = player;
+}
+
+Blockade::Blockade(const Blockade &d){
+	this->src = d.src;
+	this->player = d.player;
 }
 
 bool Blockade::validate()

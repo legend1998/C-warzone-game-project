@@ -1,4 +1,4 @@
-#include "temp.cpp"
+#include "player.h"
 
 void printTerritory(list<Territory *> territory)
 {
@@ -17,7 +17,17 @@ int main()
 	
     Player p1("player 1");
     Player p2("player 2");
+
     Player p3("player 3");
+    
+    //using stream insertion operator change player name from player 3 to player three
+    
+    cin>>p3;
+    
+    cout<<"after changing"<<endl;
+    cout<<p3.getName()<<endl;
+    
+	system("pause");
     
     // make territory with arguemnt name and owner
     

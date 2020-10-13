@@ -28,10 +28,18 @@ class Player
 public:
     Player(string name);
     
+    // class having copy constructor 
+
+    Player(const Player &player);
+    
+    //class having stream insertion operator
+    
+    friend istream & operator >> (istream &in ,Player &player);
+
     void AddCard(Card *card);
-    
+
     void AddTerritory(Territory *territory);
-    
+
     string getName();
 
     // Player have own territories to defend
@@ -41,8 +49,16 @@ public:
     list<Territory *> ToAttack();
 
     // player can issue order  using order pointer type
-	void IssueOrder(Order *order);
+    void IssueOrder(Order *order);
 };
+
+
+//Player class stream insertion operator
+istream  & operator >>(istream &in ,Player &player){
+	cout<<"enter player name to create player";
+	in>>player.name;
+}
+
 
 class Territory
 {
@@ -52,12 +68,23 @@ class Territory
     list<Territory *> neighbour_territories;
 
 public:
-    Territory(string name, Player * owner)
+    Territory(string name, Player *owner)
     {
         this->name = name;
         this->owner = owner;
         this->troops = 0;
     }
+    
+    
+    // copy constructor 
+    Territory(const Territory &t){
+    	this->name = t.name;
+    	this->troops = t.troops;
+    	this->owner = t.owner;
+	}
+    
+    // stream insertion operator for territory class
+    friend istream & operator >>(istream &in, Territory &t);
 
     Player *getOwner()
     {
@@ -88,3 +115,12 @@ public:
         this->neighbour_territories.push_back(territory);
     }
 };
+
+// stream insertion operator for territory class
+istream & operator >>(istream &in, Territory &t){
+	cout<<"enter territory name"<<endl;
+	cin>>t.name;
+	cout<<"enter troops"<<endl;
+	cin>>t.troops;
+	
+}
